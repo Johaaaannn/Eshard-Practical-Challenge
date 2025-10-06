@@ -1,0 +1,65 @@
+# 🧩 Part 1 – Short Knowledge Questions
+
+---
+
+### 1. What’s the difference between a bind mount and a volume in Docker?
+
+A **bind mount** maps an **existing directory** from the host system into the container.  
+A **Docker volume** is managed directly by Docker and stored in `/var/lib/docker/volumes`, providing safer and more portable data management.
+
+---
+
+### 2. How do you configure a static IP address in Linux (Ubuntu)?
+
+- During OS installation, or manually:
+  - On older versions: `/etc/network/interfaces` (deprecated since Ubuntu 18.04).
+  - On recent versions: edit `/etc/netplan/01-netcfg.yaml`, then apply changes with:
+    ```bash
+    sudo netplan apply
+    ```
+
+---
+
+### 3. What does `iptables -A INPUT -p tcp --dport 22 -j DROP` do?
+
+Blocks **all incoming TCP connections** on port **22**, making **SSH inaccessible** from outside.
+
+---
+
+### 4. What’s the use of `/etc/resolv.conf`?
+
+Stores **DNS configuration**, including name servers and resolver options.
+
+---
+
+### 5. In Docker, what’s the difference between the `--network=host` and `bridge` modes?
+
+- `--network=host`: the container shares the **host’s network stack**, with no network isolation (same IP and ports).
+- `bridge` (default): the container has its **own virtual network interface** with internal IP, gateway, and DNS.  
+  Ports must be explicitly exposed using the `-p` option.
+
+---
+
+### 6. What are common ways to harden SSH access?
+
+- Use **SSH key-based authentication** (disable password authentication).  
+- **Disable root login** and restrict allowed users (`AllowUsers`).  
+- Enable **Fail2ban** to protect against brute-force attacks.
+
+---
+
+### 7. You find a file with 777 permissions in a production container. What would you do?
+
+- Investigate **why** the file has these permissions.  
+- If authorized, **reduce them** to the minimum necessary (`chmod 644` or `600`).  
+- **Notify** the service owner and manager for proper follow-up and security review.
+
+---
+
+### 8. Describe what a reverse proxy does and name one example.
+
+A **reverse proxy** forwards client requests to backend servers while exposing a single public interface.  
+It can handle **SSL/TLS termination**, **load balancing**, and enhance **security** by hiding internal infrastructure.  
+**Example:** Nginx.
+
+---
