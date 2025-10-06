@@ -1,12 +1,12 @@
 # eShard – Practical Challenge (Secure Docker Web Service)
 
-## 🧩 Overview
+## Overview
 This project simulates a **minimal secure web service** deployment using Docker and Nginx.  
 It includes container hardening, basic monitoring, and a deliberate vulnerability for demonstration.
 
 ---
 
-## ⚙️ Setup
+## Setup
 
 ### Requirements
 - Docker Desktop with WSL2 backend  
@@ -27,7 +27,7 @@ Access the service at:
 
 ---
 
-## 🧱 Security Controls Implemented
+## Security Controls Implemented
 
 | Area | Description |
 |------|--------------|
@@ -41,7 +41,7 @@ Access the service at:
 
 ---
 
-## 🔐 Simulated Firewall Rules (documented – not applied in WSL)
+## Simulated Firewall Rules (documented – not applied in WSL)
 
 If running on a full Linux host:
 ```bash
@@ -56,7 +56,7 @@ On WSL, this layer is **simulated/documented**.
 
 ---
 
-## 📊 Monitoring
+## Monitoring
 
 A cron job checks memory usage every 5 minutes:
 ```bash
@@ -76,14 +76,14 @@ If usage exceeds 70%, an alert is appended:
 
 ---
 
-## ⚠️ Simulated Vulnerability
+## Simulated Vulnerability
 
 1. **Exposed Admin Directory**
    - `/admin/` allows directory listing and contains a world-readable `secrets.txt` file (`chmod 777`).
 2. **Exposed Status Page**
    - `/status` exposes live Nginx metrics without authentication.
 
-### ✅ Fix Recommendation
+### Fix Recommendation
 ```nginx
 location /status {
   stub_status;
@@ -103,7 +103,7 @@ chmod 640 admin/secrets.txt
 
 ---
 
-## 🧾 How to Run Tests
+## How to Run Tests
 
 ```bash
 # Start environment
@@ -121,7 +121,7 @@ sudo tail -n 10 /var/log/websvc/mem_alert.log
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 - **Base image**: `nginx:1.27-alpine`
 - **Container runtime**: Docker Compose v2
 - **OS**: Ubuntu 24.04 LTS (WSL2)
