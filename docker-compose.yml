@@ -1,0 +1,20 @@
+services:
+  web:
+    image: nginx:1.27-alpine
+    user: "101:101"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./admin:/var/www/admin
+      - ./logs:/var/log/nginx
+    read_only: true
+    tmpfs:
+      - /run:uid=101,gid=101,mode=755
+      - /var/run/nginx:uid=101,gid=101,mode=755
+      - /var/cache/nginx:uid=101,gid=101,mode=755
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
